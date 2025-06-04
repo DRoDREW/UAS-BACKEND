@@ -1,5 +1,8 @@
 <?php
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 namespace App\Http\Controllers;
 
 use App\Models\Post;
@@ -12,7 +15,12 @@ class PostController extends Controller
      */
     public function index()
     {
+<<<<<<< Updated upstream
         //
+=======
+        $posts = Post::latest()->paginate(10);
+        return view('posts.index', compact('posts'));
+>>>>>>> Stashed changes
     }
 
     /**
@@ -20,7 +28,11 @@ class PostController extends Controller
      */
     public function create()
     {
+<<<<<<< Updated upstream
         //
+=======
+        return view('posts.create');
+>>>>>>> Stashed changes
     }
 
     /**
@@ -28,7 +40,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< Updated upstream
         //
+=======
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'user_id' => auth()->id()
+        ]);
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success', 'Post created successfully.');
+>>>>>>> Stashed changes
     }
 
     /**
@@ -36,7 +65,11 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+<<<<<<< Updated upstream
         //
+=======
+        return view('posts.show', compact('post'));
+>>>>>>> Stashed changes
     }
 
     /**
@@ -44,7 +77,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+<<<<<<< Updated upstream
         //
+=======
+        return view('posts.edit', compact('post'));
+>>>>>>> Stashed changes
     }
 
     /**
@@ -52,7 +89,23 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+<<<<<<< Updated upstream
         //
+=======
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success', 'Post updated successfully.');
+>>>>>>> Stashed changes
     }
 
     /**
@@ -60,6 +113,16 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+<<<<<<< Updated upstream
         //
     }
 }
+=======
+        $post->delete();
+
+        return redirect()
+            ->route('posts.index')
+            ->with('success', 'Post deleted successfully.');
+    }
+}
+>>>>>>> Stashed changes
