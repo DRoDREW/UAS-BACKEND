@@ -19,4 +19,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::resource('posts', PostController::class);
+
+    Route::get('/schedule', function() { return view('academic.schedule'); })->name('schedule');
+    Route::get('/biodata', function() { return view('academic.biodata'); })->name('biodata');
+    Route::get('/grades', function() { return view('academic.grades'); })->name('grades');
+    Route::get('/payment', function() { return view('academic.payment'); })->name('payment');
+    Route::get('/academic-calendar', function() { return view('academic.calendar'); })->name('academic-calendar');
 });

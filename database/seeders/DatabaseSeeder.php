@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'nim' => '12345602', // Contoh NIM
-            'password' => 'admin123', // Berikan plain text password
+            'name' => 'Akew',
+            'email' => 'akew.535240123@stu.untar.ac.id',
+            'nim' => '535240123', // Contoh NIM
+            'password' => 'akew123', // Berikan plain text password
         ]);
     }
 }
