@@ -8,8 +8,8 @@
             height: 100vh;
             background-color: #f8f9fa;
             padding: 30px;
-            border-left: 1px solid #dee2e6;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            border-right: 1px solid #dee2e6; /* Changed from border-left to border-right */
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Changed shadow direction */
         }
         .sidebar-container {
             background-color: white;
@@ -21,7 +21,7 @@
             width: 100%;
             margin-bottom: 15px;
             padding: 12px;
-            background-color:rgb(33, 33, 33);
+            background-color: rgb(33, 33, 33);
             border-color: rgb(33, 33, 33);
             color: white;
             text-align: left;
@@ -37,7 +37,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .news-section {
-            padding-right: 30px;
+            padding-left: 30px; /* Changed from padding-right to padding-left */
         }
     </style>
 </head>
@@ -58,7 +58,29 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!-- News Section -->
+            <!-- Sidebar - Moved to left -->
+            <div class="col-md-3 sidebar">
+                <div class="sidebar-container">
+                    <h4 class="mb-4">Menu Akademik</h4>
+                    <a href="{{ route('schedule') }}" class="btn sidebar-button">
+                        Jadwal Kuliah
+                    </a>
+                    <a href="{{ route('biodata') }}" class="btn sidebar-button">
+                        Biodata
+                    </a>
+                    <a href="{{ route('grades') }}" class="btn sidebar-button">
+                        History Nilai
+                    </a>
+                    <a href="{{ route('payment') }}" class="btn sidebar-button">
+                        Pembayaran
+                    </a>
+                    <a href="{{ route('academic-calendar') }}" class="btn sidebar-button">
+                        Kalender Akademik
+                    </a>
+                </div>
+            </div>
+
+            <!-- News Section - Moved to right -->
             <div class="col-md-9 news-section">
                 <h2 class="mb-4">Campus News</h2>
                 
@@ -88,28 +110,6 @@
                         <p class="card-text">Tim mahasiswa meraih juara pertama dalam kompetisi robotika tingkat nasional...</p>
                         <a href="#" class="">Read more</a>
                     </div>
-                </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="col-md-3 sidebar">
-                <div class="sidebar-container">
-                    <h4 class="mb-4">Menu Akademik</h4>
-                    <a href="{{ route('schedule') }}" class="btn sidebar-button">
-                        Jadwal Kuliah
-                    </a>
-                    <a href="{{ route('biodata') }}" class="btn sidebar-button">
-                        Biodata
-                    </a>
-                    <a href="{{ route('grades') }}" class="btn sidebar-button">
-                        History Nilai
-                    </a>
-                    <a href="{{ route('payment') }}" class="btn sidebar-button">
-                        Pembayaran
-                    </a>
-                    <a href="{{ route('academic-calendar') }}" class="btn sidebar-button">
-                        Kalender Akademik
-                    </a>
                 </div>
             </div>
         </div>
