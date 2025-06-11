@@ -37,7 +37,6 @@ class PostController extends Controller
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
-            'user_id' => auth()->id() // Menambahkan user_id sesuai best practice
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
