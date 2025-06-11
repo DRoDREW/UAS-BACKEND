@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Academic\BiodataController;
 
 // Redirect root to login if not authenticated
 Route::get('/', function () {
@@ -31,9 +32,7 @@ Route::middleware('auth')->group(function () {
             return view('academic.schedule'); 
         })->name('schedule');
         
-        Route::get('/biodata', function() { 
-            return view('academic.biodata'); 
-        })->name('biodata');
+        Route::get('/biodata', [BiodataController::class, 'index'])->name('biodata');
         
         Route::get('/grades', function() { 
             return view('academic.grades'); 
