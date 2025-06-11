@@ -1,82 +1,50 @@
-<?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< Updated upstream
-
-class AuthController extends Controller
-{
-    //
-}
-=======
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use App\Models\User;
 
 class AuthController extends Controller
 {
-    /**
-     * Menampilkan halaman login mahasiswa
-     */
     public function showLogin()
     {
-        return view('posts.login');
+        return view('login');
     }
 
-    /**
-     * Proses login mahasiswa
-     */
     public function login(Request $request)
     {
-        // Validasi input
         $credentials = $request->validate([
-            'email' => ['required', 'email', 'exists:users,email'],
-            'password' => ['required', 'min:8'],
-        ], [
-            'email.exists' => 'Email tidak terdaftar sebagai mahasiswa.',
-            'password.min' => 'Password minimal 8 karakter.'
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        // Cek apakah user dengan email tersebut adalah mahasiswa
         $user = User::where('email', $credentials['email'])->first();
 
-        if (!$user || $user->role !== 'mahasiswa') {
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
             return back()->withErrors([
-                'email' => 'Anda tidak terdaftar sebagai mahasiswa.',
+                'email' => 'These credentials do not match our records.',
             ])->onlyInput('email');
         }
 
-        // Proses authentication
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            
-            // Redirect berdasarkan role
-            return redirect()->intended('/dashboard-mahasiswa');
-        }
+        Auth::login($user);
+        $request->session()->regenerate();
 
-        return back()->withErrors([
-            'password' => 'Password yang dimasukkan salah.',
-        ])->onlyInput('email');
+        return redirect()->intended('/dashboard');
     }
 
-    /**
-     * Proses logout
-     */
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect('/login')->with('status', 'Anda telah berhasil logout.');
     }
 
-    /**
-     * Dashboard mahasiswa
-     */
     public function dashboard()
     {
-        // Pastikan hanya mahasiswa yang bisa akses
         if (Auth::check() && Auth::user()->role === 'mahasiswa') {
             return view('mahasiswa.dashboard', [
                 'mahasiswa' => Auth::user()
@@ -86,4 +54,3 @@ class AuthController extends Controller
         return redirect('/login')->with('error', 'Akses ditolak.');
     }
 }
->>>>>>> Stashed changes
