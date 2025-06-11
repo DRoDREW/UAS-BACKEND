@@ -75,6 +75,11 @@
                                value="{{ old('email') }}" 
                                required 
                                autofocus>
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -84,6 +89,11 @@
                                id="password" 
                                name="password" 
                                required>
+                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="mb-3 form-check">

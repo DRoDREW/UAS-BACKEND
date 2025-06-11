@@ -1,10 +1,10 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-// use Illuminate\Support\Facades\Hash; // Hash facade tidak lagi dibutuhkan di sini jika mutator dihapus
 
 class User extends Authenticatable
 {
@@ -13,7 +13,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'nim', // Tambahkan 'nim' jika ingin bisa diisi massal (mass assignable)
+        'nim',      // sudah ditambahkan agar mass assignable
         'password',
     ];
 
@@ -22,7 +22,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // HAPUS ATAU KOMENTARI MUTATOR INI:
+    // Hapus atau komentari mutator jika ingin menggunakan Laravel native hashing
     /*
     public function setPasswordAttribute($value)
     {
@@ -36,7 +36,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed', // Biarkan ini, ini akan menangani hashing secara otomatis
+            'password' => 'hashed', // Laravel native hashing
         ];
     }
 }
