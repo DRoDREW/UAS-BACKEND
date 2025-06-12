@@ -32,6 +32,10 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
+        // Redirect sesuai role
+        if ($user->role === 'admin') {
+            return redirect()->intended('/admin/mahasiswa/create');
+        }
         return redirect()->intended('/dashboard');
     }
 

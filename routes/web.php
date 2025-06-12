@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Academic\BiodataController;
+use App\Http\Controllers\AdminMahasiswaController;
 
 // Redirect root to login if not authenticated
 Route::get('/', function () {
@@ -50,3 +51,15 @@ Route::middleware('auth')->group(function () {
     // Posts resource routes
     Route::resource('posts', PostController::class);
 });
+
+// Route admin hanya untuk user role admin
+gateAdmin();
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/mahasiswa/create', [AdminMahasiswaController::class, 'create'])->name('admin.mahasiswa.create');
+    Route::post('/admin/mahasiswa/store', [AdminMahasiswaController::class, 'store'])->name('admin.mahasiswa.store');
+});
+
+// Helper middleware admin
+function gateAdmin() {
+    app('router')->aliasMiddleware('admin', \App\Http\Middleware\AdminMiddleware::class);
+}

@@ -44,5 +44,15 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
+
+        // Membuat user admin jika belum ada
+        \App\Models\User::firstOrCreate([
+            'email' => 'admin@admin.com'
+        ], [
+            'name' => 'Admin',
+            'nim' => '99999999',
+            'password' => 'admin123',
+            'role' => 'admin',
+        ]);
     }
 }
