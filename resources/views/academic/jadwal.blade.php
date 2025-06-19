@@ -4,6 +4,7 @@
     <title>Jadwal Akademik - {{ Auth::user()->name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        
         .table-hover tbody tr:hover {
             background-color: rgba(13, 110, 253, 0.1);
         }
