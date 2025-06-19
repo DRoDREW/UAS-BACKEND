@@ -71,9 +71,6 @@
                     <a href="{{ route('grades') }}" class="btn sidebar-button">
                         History Nilai
                     </a>
-                    <a href="{{ route('payment') }}" class="btn sidebar-button">
-                        Pembayaran
-                    </a>
                     <a href="{{ route('academic-calendar') }}" class="btn sidebar-button">
                         Kalender Akademik
                     </a>
