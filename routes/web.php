@@ -9,6 +9,9 @@ use App\Http\Controllers\AdminMahasiswaController;
 use App\Http\Controllers\Academic\ScheduleController;
 use App\Http\Controllers\Academic\JadwalAkademikController;
 use App\Models\JadwalAkademik;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\JadwalController;
 
 // Redirect root to login
 Route::get('/', function () {
@@ -17,6 +20,9 @@ Route::get('/', function () {
 
 // Auth routes
 Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('login');
+    });
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 });
@@ -38,7 +44,11 @@ Route::middleware('auth')->group(function () {
 // Admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('users', UserController::class);
         Route::resource('mahasiswa', AdminMahasiswaController::class);
+        Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal');
+        Route::delete('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
     });
 });
 

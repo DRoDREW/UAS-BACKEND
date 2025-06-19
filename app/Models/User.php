@@ -16,9 +16,12 @@ class User extends Authenticatable
         'email',
         'nim',
         'password',
-        'role', // tambahkan role
+        'role', 
     ];
-
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
     protected $hidden = [
         'password',
         'remember_token',

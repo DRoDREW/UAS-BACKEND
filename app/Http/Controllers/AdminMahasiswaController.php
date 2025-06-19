@@ -48,7 +48,6 @@ class AdminMahasiswaController extends Controller
             'alamat' => $validated['alamat'],
             'email' => $validated['email'],
         ]);
-
-        return redirect()->route('admin.mahasiswa.create')->with('success', 'Data mahasiswa berhasil ditambahkan!');
+        return redirect()->route('admin.dashboard')->with('success', 'Mahasiswa baru berhasil ditambahkan!');
     }
 }

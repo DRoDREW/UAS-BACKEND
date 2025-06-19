@@ -46,13 +46,12 @@ class DatabaseSeeder extends Seeder
         }
 
         // Membuat user admin jika belum ada
-        \App\Models\User::firstOrCreate([
-            'email' => 'admin@admin.com'
-        ], [
+        User::create([
             'name' => 'Admin',
-            'nim' => '99999999',
+            'email' => 'admin@admin.com',
+            'nim' => 'ADMIN123',
             'password' => 'admin123',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
 
         $this->call([
