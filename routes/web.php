@@ -6,6 +6,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\Academic\BiodataController;
 use App\Http\Controllers\AdminMahasiswaController;
+use App\Http\Controllers\Academic\ScheduleController;
+use App\Http\Controllers\Academic\JadwalAkademikController;
+use App\Models\JadwalAkademik;
 
 // Redirect root to login
 Route::get('/', function () {
@@ -22,17 +25,14 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
     // Academic routes
     Route::prefix('academic')->group(function () {
         Route::get('/grades', [GradeController::class, 'index'])->name('grades');
         Route::get('/biodata', [BiodataController::class, 'index'])->name('biodata');
-        Route::get('/schedule', function() { return view('academic.schedule'); })->name('schedule');
-        Route::get('/payment', function() { return view('academic.payment'); })->name('payment');
+        Route::get('/schedule', [JadwalAkademikController::class, 'index'])->name('schedule');
         Route::get('/calendar', function() { return view('academic.calendar'); })->name('academic-calendar');
+        Route::get('/jadwal-akademik', [JadwalAkademikController::class, 'index'])->name('jadwal-akademik');
     });
-
-    Route::resource('posts', PostController::class);
 });
 
 // Admin routes
